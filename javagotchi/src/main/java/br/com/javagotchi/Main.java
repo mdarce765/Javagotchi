@@ -14,13 +14,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		do{
-			System.out.print("""
-							\n1 - Carregar Javagotchi
-							2 - Criar novo Javagotchi
-							3 - Ver Javagotchis
-							0 - Sair\n
-							Digite a sua opção: """);
-			int opcao = sc.nextInt();
+			System.out.print("\n1 - Carregar Javagotchi\n2 - Criar novo Javagotchi\n3 - Ver Javagotchis\n\n0 - Sair\nDigite a sua opção: ");
+			int opcao = Integer.parseInt(sc.nextLine());
 			switch(opcao){
 					case 0 -> {
 						System.out.println("SAINDO... NÃO SE ESQUEÇA DE NÓS :)");
@@ -35,16 +30,16 @@ public class Main {
 	}
 
 	private static void criarJavagotchi(){
-		int escolha;
 		String nome;
+		int opcao;
 
 		do{
 			System.out.print("Digite o nome do seu Javagotchi: ");
-			nome = sc.next();
+			nome = sc.nextLine();
 			jc.setNome(nome);
 			System.out.print("\nNOME: " + jc.getNome() + "\nDeseja manter o nome? \n1 - Sim\n2 - Não\n\nDigite sua escolha: ");
-			escolha = sc.nextInt();
-		}while(escolha != 1);
+			opcao = Integer.parseInt(sc.nextLine());
+		}while(opcao != 1);
 
 		try(FileWriter escritor = new FileWriter("Javagotchi.txt", true);){
 			escritor.write(nome + "," + jc.getHp() + "," + jc.getFome() + "," + jc.getIdade() + "," + jc.getHigiene() + "," + jc.getEnergia() + ";\n");
