@@ -11,24 +11,25 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Main {
 	static ArrayList<String> listaJavagotchi = new ArrayList<String>();
-	static ArrayList<String> listaUsado = new ArrayList<String>();
+	//static ArrayList<String> listaUsado = new ArrayList<String>();
 	static Scanner sc = new Scanner(System.in);
 	static Javagotchi jc = new Javagotchi();
 	static int opcao;
 
 	public static void main(String[] args) {
 		do{
-			System.out.print("\n1 - Carregar Javagotchi\n2 - Criar novo Javagotchi\n3 - Ver Javagotchis\n\n0 - Sair\nDigite a sua opção: ");
+			System.out.print("\n1 - Carregar Javagotchi\n2 - Criar novo Javagotchi\n3 - Ver Javagotchis\n4 - Atualizar Javagotchi\n5 - Apagar Javagotchis\n\n0 - Sair\nDigite a sua opção: ");
 			opcao = Integer.parseInt(sc.nextLine());
 			switch(opcao){
 					case 0 -> {
 						System.out.println("SAINDO... NÃO SE ESQUEÇA DE NÓS :)");
 						System.exit(0);
 					}
-					//case 1 -> carregarJavagotchi();
 					case 1 -> carregarJavagotchi();
 					case 2 -> criarJavagotchi();
 					case 3 -> verJavagotchis();
+					//case 4 -> atualizarJavagotchi();
+					case 5 -> apagarJavagotchi();
 					default -> System.out.println("OPÇÃO INVÁLIDA");
 				}
 		}while(true);
@@ -39,16 +40,15 @@ public class Main {
 		System.out.print("Digite o id do Javagotchi que deseja carregar: ");
 		opcao = Integer.parseInt(sc.nextLine());
 
-		String[] escolhido = listaJavagotchi.get(opcao).replace(";", "").trim().split(",");
-		System.out.println("Javagotchi escolhido é: " + escolhido);
-		//String teste = escolhido.split(",");
+		String[] escolhido = listaJavagotchi.get(opcao).trim().split(",");
 
-		for(int i = 0; i<6; i++){
-			System.out.println(escolhido[i]);
-		}
+		String save = "Save" + escolhido[0].replaceAll("\\s+","") + ".txt";
 
-		for(int i =0; i<listaUsado.size(); i++){
-			System.out.println(i + " - " + listaUsado.get(i));
+		try(FileWriter escritor = new FileWriter(save)){
+			escritor.write(escolhido[0] + "," + jc.getHp() + "," + jc.getFome() + "," + jc.getIdade() + "," + jc.getHigiene() + "," + jc.getEnergia() + "\n");
+		}catch(IOException e) {
+			System.out.println("Algum erro aconteceu durante a escrita!");
+			e.printStackTrace();
 		}
 		
 	}
@@ -64,7 +64,7 @@ public class Main {
 			opcao = Integer.parseInt(sc.nextLine());
 		}while(opcao != 1);
 
-		try(FileWriter escritor = new FileWriter("Javagotchi.txt", true);){
+		try(FileWriter escritor = new FileWriter("Javagotchis.txt", true);){
 			escritor.write(nome + "," + jc.getHp() + "," + jc.getFome() + "," + jc.getIdade() + "," + jc.getHigiene() + "," + jc.getEnergia() + "\n");
 		}catch(IOException e) {
 			System.out.println("Algum erro aconteceu durante a escrita!");
@@ -73,7 +73,7 @@ public class Main {
 	}
 
 	private static void verJavagotchis(){
-		File arquivo = new File("Javagotchi.txt");
+		File arquivo = new File("Javagotchis.txt");
 		listaJavagotchi.clear();
 		System.out.println("id - NOME");
 		try(Scanner leitor = new Scanner(arquivo)){
@@ -88,6 +88,26 @@ public class Main {
 
 		for(int i =0; i<listaJavagotchi.size(); i++){
 			System.out.println(i + " - " + listaJavagotchi.get(i));
+		}
+	}
+
+	//private static void atualizarJavagotchi(){}
+
+	private static void apagarJavagotchi(){
+		verJavagotchis();
+
+		System.out.print("Digite o id do Javagotchi que deseja apagar: ");
+		opcao = Integer.parseInt(sc.nextLine());
+
+		listaJavagotchi.remove(opcao);
+
+		try(FileWriter escritor = new FileWriter("Javagotchis.txt");){
+			for(int i = 0; i < listaJavagotchi.size(); i++){
+				escritor.write(listaJavagotchi.get(i) + "\n");
+			}
+		}catch(IOException e) {
+			System.out.println("Algum erro aconteceu durante a escrita!");
+			e.printStackTrace();
 		}
 	}
 }
