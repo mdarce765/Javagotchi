@@ -11,7 +11,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Main {
 	static ArrayList<String> listaJavagotchi = new ArrayList<String>();
-	//static ArrayList<String> listaUsado = new ArrayList<String>();
 	static Scanner sc = new Scanner(System.in);
 	static Javagotchi jc = new Javagotchi();
 	static int opcao;
@@ -43,7 +42,7 @@ public class Main {
 
 		String[] escolhido = listaJavagotchi.get(opcao).trim().split(",");
 
-		String save = "Save" + escolhido[0].replaceAll("\\s+","") + ".txt";
+		String save = "saves/Save" + escolhido[0].replaceAll("\\s+","") + ".txt";
 
 		try(FileWriter escritor = new FileWriter(save)){
 			escritor.write(escolhido[0] + "," + jc.getHp() + "," + jc.getFome() + "," + jc.getIdade() + "," + jc.getHigiene() + "," + jc.getEnergia() + "\n");
@@ -60,7 +59,7 @@ public class Main {
 
 		System.out.println("-- CRIANDO UM NOVO JAVAGOTCHI --");
 
-		try(FileWriter escritor = new FileWriter("Javagotchis.txt", true);){
+		try(FileWriter escritor = new FileWriter("saves/Javagotchis.txt", true);){
 			escritor.write(criar("") + "," + jc.getHp() + "," + jc.getFome() + "," + jc.getIdade() + "," + jc.getHigiene() + "," + jc.getEnergia() + "\n");
 		}catch(IOException e) {
 			System.out.println("Algum erro aconteceu durante a escrita!");
@@ -72,7 +71,7 @@ public class Main {
 
 	private static void verJavagotchis(){
 		System.out.println("-- VISUALIZAÇÃO DE JAVAGOTCHIS --");
-		File arquivo = new File("Javagotchis.txt");
+		File arquivo = new File("saves/Javagotchis.txt");
 		listaJavagotchi.clear();
 		System.out.println("id - NOME");
 		try(Scanner leitor = new Scanner(arquivo)){
@@ -120,7 +119,7 @@ public class Main {
 	}
 
 	private static void escreverArquivo(ArrayList<String> lista){
-		try(FileWriter escritor = new FileWriter("Javagotchis.txt");){
+		try(FileWriter escritor = new FileWriter("saves/Javagotchis.txt");){
 			for(int i = 0; i < listaJavagotchi.size(); i++){
 				escritor.write(listaJavagotchi.get(i) + "\n");
 			}
