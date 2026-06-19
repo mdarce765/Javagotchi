@@ -60,6 +60,10 @@ public class Main {
 
 		System.out.println("-- JAVAGOTCHI CARREGADO -- ");
 		Jogo.startGame(jc);
+
+		listaJavagotchi.set(opcao, jc.getNome() + "," + jc.getHp() + "," + jc.getFome() + "," + jc.getIdade() + "," + jc.getHigiene() + "," + jc.getEnergia());
+		
+		escreverArquivo(listaJavagotchi);
 	}
 
 	private static void criarJavagotchi(){
