@@ -10,8 +10,6 @@ public class Jogo {
 	static int opcao;
 
     public static void startGame(Javagotchi jc){
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
         System.out.println("JOGO INICIADO");
         do{
             System.out.println("\nNOME: \"" + jc.getNome() + "\" HP: " + jc.getHp() + " FOME: " + jc.getFome() + " IDADE: " + jc.getIdade() + " HIGIENE: " + jc.getHigiene() + " ENERGIA: " + jc.getEnergia());
