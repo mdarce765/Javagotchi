@@ -34,10 +34,6 @@ public class Javagotchi {
     }
 
     public void setFome(int fome){
-        if(fome >= 100){
-            System.out.println("JAVAGOTCHI PRECISA COMER");
-            return;
-        }
         this.fome = fome;
     }
 
@@ -46,18 +42,10 @@ public class Javagotchi {
     }
 
     public void setHigiene(int higiene){
-        if(higiene <= 20){
-            System.out.println("JAVAGOTCHI PRECISA SER LIMPO");
-            return;
-        }
         this.higiene = higiene;
     }
 
     public void setEnergia(int energia){
-        if(energia <= 15){
-            System.out.println("JAVAGOTCHI ESTÁ CANSADO");
-            return;
-        }
         this.energia = energia;
     }
 
@@ -65,39 +53,68 @@ public class Javagotchi {
         this.nome = nome;
     }
 
-    public void Alimentar(int higiene){
+    public void Alimentar(){
         System.out.print("\033[H\033[2J");
         System.out.flush();
 
+        if(this.higiene <= 10){
+            System.out.println("JAVAGOTCHI PRECISA SER LIMPO");
+            return;
+        }
+
         setFome(0);
-        setHigiene(higiene - 10);
-        
+        setHigiene(this.higiene - 10);
     }
     
-    public void brincar(int fome, int higiene, int energia){
+    public void brincar(){
         System.out.print("\033[H\033[2J");
         System.out.flush();
+
+        if(this.fome >= 85){
+            System.out.println("JAVAGOTCHI PRECISA COMER");
+            return;
+        }
+
+        if(this.higiene <= 20){
+            System.out.println("JAVAGOTCHI PRECISA SER LIMPO");
+            return;
+        }
+
+        if(this.energia <= 15){
+            System.out.println("JAVAGOTCHI ESTÁ CANSADO");
+            return;
+        }
         
         System.out.println("SEU JAVAGOTCHI SE DIVERTIU BASTANTE");
-        setFome(fome+20);
-        setHigiene(higiene-40);
-        setEnergia(energia-20);
+        setFome(this.fome+20);
+        setHigiene(this.higiene-40);
+        setEnergia(this.energia-20);
     }
     
     public void banho(){
         System.out.print("\033[H\033[2J");
         System.out.flush();
 
+        if(this.energia <= 5){
+            System.out.println("JAVAGOTCHI ESTÁ CANSADO");
+            return;
+        }
+
         System.out.println("JAVAGOTCHI ESTÁ LIMPO");
         setHigiene(100);
     }
     
-    public void dormir(int fome){
+    public void dormir(){
         System.out.print("\033[H\033[2J");
         System.out.flush();
 
+        if(this.fome >= 85){
+            System.out.println("JAVAGOTCHI PRECISA COMER");
+            return;
+        }
+
         System.out.println("JAVAGOTCHI ESTÁ DESCANSADO");
         setEnergia(100);
-        setFome(fome + 20);
+        setFome(this.fome + 20);
     }
 }

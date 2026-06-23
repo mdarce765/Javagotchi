@@ -27,10 +27,10 @@ public class Jogo {
                             }
                         }
 					}
-					case 1 -> jc.Alimentar(jc.getHigiene());
-					case 2 -> jc.brincar(jc.getFome(), jc.getHigiene(), jc.getEnergia());
+					case 1 -> jc.Alimentar();
+					case 2 -> jc.brincar();
 					case 3 -> jc.banho();
-					case 4 -> jc.dormir(jc.getFome());
+					case 4 -> jc.dormir();
 					default -> System.out.println("OPÇÃO INVÁLIDA");
 				}
 		}while(opcao != 0);
