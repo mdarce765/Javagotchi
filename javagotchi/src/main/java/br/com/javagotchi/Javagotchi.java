@@ -4,6 +4,7 @@ public class Javagotchi {
     private int hp = 100, fome = 0, idade = 0, higiene = 100, energia = 100;
     private String nome;
 
+    // Getters
     public int getHp(){
         return hp;
     }
@@ -28,12 +29,14 @@ public class Javagotchi {
         return nome;
     }
 
-
+    // Setters
     public void setHp(int hp){
         this.hp = hp;
     }
 
     public void setFome(int fome){
+        if(fome >= 100) fome = 100;
+        if(fome <= 0) fome = 0;
         this.fome = fome;
     }
 
@@ -42,10 +45,14 @@ public class Javagotchi {
     }
 
     public void setHigiene(int higiene){
+        if(higiene >= 100) higiene = 100;
+        if(higiene <= 0) higiene = 0;
         this.higiene = higiene;
     }
 
     public void setEnergia(int energia){
+        if(energia >= 100) energia = 100;
+        if(energia <= 0) energia = 0;
         this.energia = energia;
     }
 
@@ -53,7 +60,8 @@ public class Javagotchi {
         this.nome = nome;
     }
 
-    public void Alimentar(){
+    // Métodos auxiliares
+    public void alimentar(){
         System.out.print("\033[H\033[2J");
         System.out.flush();
 
@@ -64,6 +72,7 @@ public class Javagotchi {
 
         setFome(0);
         setHigiene(this.higiene - 10);
+        System.out.println("SEU JAVAGOTCHI ESTÁ ALIMENTADO");
     }
     
     public void brincar(){
@@ -85,10 +94,10 @@ public class Javagotchi {
             return;
         }
         
-        System.out.println("SEU JAVAGOTCHI SE DIVERTIU BASTANTE");
         setFome(this.fome+20);
         setHigiene(this.higiene-40);
         setEnergia(this.energia-20);
+        System.out.println("SEU JAVAGOTCHI SE DIVERTIU BASTANTE");
     }
     
     public void banho(){
@@ -100,8 +109,8 @@ public class Javagotchi {
             return;
         }
 
-        System.out.println("JAVAGOTCHI ESTÁ LIMPO");
         setHigiene(100);
+        System.out.println("JAVAGOTCHI ESTÁ LIMPO");
     }
     
     public void dormir(){
@@ -113,8 +122,8 @@ public class Javagotchi {
             return;
         }
 
-        System.out.println("JAVAGOTCHI ESTÁ DESCANSADO");
         setEnergia(100);
         setFome(this.fome + 20);
+        System.out.println("JAVAGOTCHI ESTÁ DESCANSADO");
     }
 }

@@ -6,3 +6,7 @@ Espero que gostem.
 
 # Projetos
 * [Javagotchi](https://github.com/mdarce765/ProjetosPessoais/tree/main/javagotchi)
+
+# Ideias futuras
+* RPG
+* Aplicativo de venda de loja / lanchonete

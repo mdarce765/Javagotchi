@@ -2,9 +2,6 @@ package br.com.javagotchi;
 
 import java.util.Scanner;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication
 public class Jogo {
 	static Scanner sc = new Scanner(System.in);
 	static int opcao;
@@ -27,7 +24,7 @@ public class Jogo {
                             }
                         }
 					}
-					case 1 -> jc.Alimentar();
+					case 1 -> jc.alimentar();
 					case 2 -> jc.brincar();
 					case 3 -> jc.banho();
 					case 4 -> jc.dormir();

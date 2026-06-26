@@ -6,15 +6,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication
 public class Main {
 	static ArrayList<String> listaJavagotchi = new ArrayList<String>();
 	static Scanner sc = new Scanner(System.in);
 	static Javagotchi jc = new Javagotchi();
 	static int opcao;
 
+	//Funções principais
 	public static void main(String[] args) {
 		clearConsole();
 		do{
@@ -48,6 +46,7 @@ public class Main {
 		if(outOfIndex(opcao)){
 			String[] escolhido = listaJavagotchi.get(opcao).trim().split(",");
 
+			jc = new Javagotchi();
 			jc.setNome(escolhido[0]);
 			jc.setHp(Integer.parseInt(escolhido[1]));
 			jc.setFome(Integer.parseInt(escolhido[2]));
@@ -62,6 +61,8 @@ public class Main {
 			
 			escreverArquivo(listaJavagotchi);
 			clearConsole();
+			jc = new Javagotchi();
+			
 			System.out.println("DADOS SALVOS NO ARQUIVO \"Javagotchi.txt\"");
 		}
 	}
@@ -143,6 +144,7 @@ public class Main {
 		}
 	}
 
+	// Funções auxiliares
 	private static void escreverArquivo(ArrayList<String> lista){
 		try(FileWriter escritor = new FileWriter("Javagotchis.txt");){
 			for(int i = 0; i < listaJavagotchi.size(); i++){
@@ -155,13 +157,14 @@ public class Main {
 	}
 
 	private static String criar(String mensagem){
+		int confirmar;
 		String nome;
 		do{
 			System.out.print("Digite o " + mensagem + "nome do seu Javagotchi: ");
 			nome = sc.nextLine();
 			System.out.print("\n"+ mensagem.toUpperCase() + "NOME: " + nome + "\nDeseja manter o nome? \n1 - Sim\n2 - Não\n\nDigite sua escolha: ");
-			opcao = Integer.parseInt(sc.nextLine());
-		}while(opcao != 1);
+			confirmar = Integer.parseInt(sc.nextLine());
+		}while(confirmar != 1);
 
 		return nome;
 	}
